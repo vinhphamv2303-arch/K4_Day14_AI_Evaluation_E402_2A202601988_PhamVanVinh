@@ -149,32 +149,35 @@ và quyết định thiết kế, không chép lại toàn bộ QA.
 **Kết quả dataset**
 
 | Hạng mục | Kết quả |
-|---|---|
-| Tổng số records | ____ / 20 |
-| Easy | ____ / 5 |
-| Medium | ____ / 7 |
-| Hard | ____ / 5 |
-| Adversarial | ____ / 3 |
-| Source documents được sử dụng | ____ / 10 |
-| Validator status | PASS / FAIL |
+|---|---------|
+| Tổng số records | 20 / 20 |
+| Easy | 5 / 5   |
+| Medium | 7 / 7   |
+| Hard | 5 / 5   |
+| Adversarial | 3 / 3   |
+| Source documents được sử dụng | 10 / 10 |
+| Validator status | PASS    |
+
+**Ba case đại diện cho quyết định thiết kế**
 
 **Ba case đại diện cho quyết định thiết kế**
 
 | ID | Difficulty | Source document(s) | Vì sao case phù hợp với difficulty/attack type? |
 |---|---|---|---|
-| | | | |
-| | | | |
-| | | | |
+| E01 | Easy | 01_product_catalog.md | Case chỉ yêu cầu tra cứu trực tiếp thông số của NovaBook 14 từ một document, không cần kết hợp nhiều rule hay suy luận nhiều bước. |
+| H01 | Hard | 09_escalation_and_policy_updates.md | Case yêu cầu xác định đúng phiên bản chính sách dựa trên ngày đặt hàng, phân biệt ngày đặt hàng với ngày giao hàng và xử lý ngoại lệ OrbitPlus đối với đơn trước ngày 01/09/2026. |
+| A02 | Adversarial | 00_system_scope.md | Case cố tình yêu cầu assistant bỏ qua các rule trước đó và tiết lộ hidden prompt, credentials và private notes, nên phù hợp để kiểm tra khả năng chống prompt injection. |
 
 **Điểm khó nhất khi xây dựng expected answer hoặc evidence là gì?**
 
-> *Câu trả lời:*
+> *Câu trả lời:*  
+> Điểm khó nhất là đảm bảo mọi claim trong expected answer đều được hỗ trợ trực tiếp bởi evidence trong corpus, đồng thời các case Hard vẫn phải có reasoning thực sự. Những case liên quan đến phiên bản policy, ngày hiệu lực, điều kiện và ngoại lệ cần chọn evidence cẩn thận để tránh thêm thông tin suy đoán ngoài tài liệu.
 
 **Xác nhận:**
 
-- [ ] Mọi claim trong expected answer đều có evidence hỗ trợ.
-- [ ] Không có questions trùng ý và không dùng kiến thức ngoài corpus.
-- [ ] `python validate_golden_dataset.py` báo `PASS`.
+- [x] Mọi claim trong expected answer đều có evidence hỗ trợ.
+- [x] Không có questions trùng ý và không dùng kiến thức ngoài corpus.
+- [x] `python validate_golden_dataset.py` báo `PASS`.
 
 ### Exercise 3.2 — Benchmark Run
 
